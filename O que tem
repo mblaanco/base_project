@@ -1,8 +1,0 @@
-Aqui temos um projeto padrão para desenvolver qualquer aplicação, com as configurações iniciais já realizadas:
-
-Temos o:
-1- Sucrase + nodemon;
-2- ESLint + Prettier + EditorConfig;
-3- Sequelize + configurações do bd;
-4- Organização de pastas em MVC;
-5- Controllers básicos de sessão e users;
