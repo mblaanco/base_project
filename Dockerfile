@@ -1,14 +1,12 @@
 FROM node:latest
-EXPOSE 3333
-
 # MAINTAINER Murilo Blanco Flor <muriloblan@gmail.com>
 
-RUN mkdir /home/app
+WORKDIR /app
 
-ADD . /home/app
+ADD . /app
 
-WORKDIR /home/app
+RUN npm install
 
-RUN npm i
+EXPOSE 3333
 
-#CMD [“npm”, “start”]
+CMD [“node”, “dist/server.js”]
