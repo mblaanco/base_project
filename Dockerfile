@@ -3,10 +3,12 @@ FROM node:latest
 
 WORKDIR /app
 
-ADD . /app
+COPY package.json /app
 
 RUN npm install
 
+COPY . /app
+
 EXPOSE 3333
 
-CMD [“node”, “dist/server.js”]
+CMD [ "npm", "start" ]
