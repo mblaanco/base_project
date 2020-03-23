@@ -20,9 +20,11 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 /** Rotas que exigem estar logado */
 routes.put('/users', UserController.update);
-routes.post('/addlist', upload.single('file'), TableController.store);
-routes.get('/lists', TableController.index);
 
+routes.get('/files', FileController.index);
 routes.post('/files', upload.single('file'), FileController.store);
+routes.put('/updatelist', FileController.update);
+
+// routes.get('/addlist', TableController.store);
 
 export default routes;
