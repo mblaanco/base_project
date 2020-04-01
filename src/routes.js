@@ -21,6 +21,8 @@ routes.use(authMiddleware);
 /** Rotas que exigem estar logado */
 routes.put('/users', UserController.update);
 
+routes.delete('/deletall', TableController.delete);
+
 routes.get('/files', FileController.index);
 routes.post('/files', upload.single('file'), FileController.store);
 routes.put('/updatelist', FileController.update);

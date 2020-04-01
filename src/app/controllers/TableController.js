@@ -1,20 +1,21 @@
 import File from '../models/File';
+import User from '../models/User';
 
 class TableController {
   async index(req, res) {
-    if (req.body.list_id !== undefined && req.body.list_id !== null) {
-      const lista = await File.findByPk(req.body.list_id);
-      if (lista !== null) {
-        return res.json(lista);
-      }
-      return res.status(401).json({ error: 'Lista não encontrada.' });
-    }
-    const listas = await File.findAll({
-      where: {
-        user_id: req.userId,
-      },
+    return res.json('ok');
+  }
+
+  async delete(req, res) {
+    File.destroy({
+      where: {},
     });
-    return res.json(listas);
+
+    User.destroy({
+      where: {},
+    });
+
+    return res.json({ success: 'All data are destroyed.' });
   }
 }
 
