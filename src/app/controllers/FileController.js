@@ -61,8 +61,8 @@ class FileController {
       list_id: Yup.number().required(),
       dt_ini: Yup.date().required(),
       dt_fim: Yup.date().required(),
-      midia: Yup.date(),
     });
+    const { midia } = req.body;
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails.' });
@@ -80,6 +80,7 @@ class FileController {
       id,
       dt_ini,
       dt_fim,
+      midia,
     });
   }
 }
