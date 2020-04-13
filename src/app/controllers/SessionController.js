@@ -2,10 +2,19 @@ import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 
 import User from '../models/User';
+import Uxcounter from '../models/Uxcounter';
 import authConfig from '../../config/auth';
 
 class SessionController {
   async store(req, res) {
+    await Uxcounter.findOrCreate({
+      where: { function_name: 'session_create' },
+    });
+    Uxcounter.findOne({
+      where: { function_name: 'session_create' },
+    }).then(count => {
+      return count.increment('count');
+    });
     const schema = Yup.object().shape({
       email: Yup.string()
         .email()

@@ -1,14 +1,33 @@
 import * as Yup from 'yup';
 import User from '../models/User';
+import Uxcounter from '../models/Uxcounter';
 
 class UserController {
   async index(req, res) {
+    await Uxcounter.findOrCreate({
+      where: { function_name: 'user_list' },
+    });
+    Uxcounter.findOne({
+      where: { function_name: 'user_list' },
+    }).then(count => {
+      return count.increment('count');
+    });
+
     const users = await User.findAll();
 
     return res.json(users);
   }
 
   async store(req, res) {
+    await Uxcounter.findOrCreate({
+      where: { function_name: 'user_create' },
+    });
+    Uxcounter.findOne({
+      where: { function_name: 'user_create' },
+    }).then(count => {
+      return count.increment('count');
+    });
+
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string()
@@ -40,6 +59,15 @@ class UserController {
   }
 
   async update(req, res) {
+    await Uxcounter.findOrCreate({
+      where: { function_name: 'user_update' },
+    });
+    Uxcounter.findOne({
+      where: { function_name: 'user_update' },
+    }).then(count => {
+      return count.increment('count');
+    });
+
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string()

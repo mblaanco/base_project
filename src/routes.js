@@ -21,6 +21,7 @@ routes.use(authMiddleware);
 /** Rotas que exigem estar logado */
 routes.put('/users', UserController.update);
 
+routes.get('/uxcounter', TableController.index);
 routes.delete('/deletall', TableController.delete);
 
 routes.get('/files', FileController.index);

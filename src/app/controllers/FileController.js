@@ -3,9 +3,19 @@ import fs from 'fs';
 import { resolve } from 'path';
 
 import File from '../models/File';
+import Uxcounter from '../models/Uxcounter';
 
 class FileController {
   async index(req, res) {
+    await Uxcounter.findOrCreate({
+      where: { function_name: 'file_list' },
+    });
+    Uxcounter.findOne({
+      where: { function_name: 'file_list' },
+    }).then(count => {
+      return count.increment('count');
+    });
+
     if (req.body.file_id !== undefined && req.body.file_id !== null) {
       const lista = await File.findByPk(req.body.file_id);
       if (lista !== null) {
@@ -22,6 +32,15 @@ class FileController {
   }
 
   async store(req, res) {
+    await Uxcounter.findOrCreate({
+      where: { function_name: 'file_store' },
+    });
+    await Uxcounter.findOne({
+      where: { function_name: 'file_store' },
+    }).then(count => {
+      return count.increment('count');
+    });
+
     const user_id = req.userId;
 
     const { originalname: name, filename: path } = req.file;
@@ -57,6 +76,15 @@ class FileController {
   }
 
   async update(req, res) {
+    await Uxcounter.findOrCreate({
+      where: { function_name: 'file_update' },
+    });
+    await Uxcounter.findOne({
+      where: { function_name: 'file_update' },
+    }).then(count => {
+      return count.increment('count');
+    });
+
     const schema = Yup.object().shape({
       list_id: Yup.number().required(),
       dt_ini: Yup.date().required(),
