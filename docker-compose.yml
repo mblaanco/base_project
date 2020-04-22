@@ -1,0 +1,50 @@
+version: "3"
+services:
+ # base_project:
+  #  image: muriloblancoflor/base_project:latest
+   # ports:
+ #     - 3333:3333
+#    #command: yarn sequelize db:migrate
+    #command: >
+     #   bash -c "./wait-for-it/wait-for-it.sh postgres-compose:5432 -- yarn sequelize db:migrate
+      #  && yarn dev"
+    #command: ["yarn", "dev"]
+   # links:
+    #  - postgres-compose
+   # depends_on:
+    #  - postgres-compose
+
+  postgres-compose:
+    image: mdillon/postgis
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=base
+    volumes:
+      - ~/Documentos/PostGresSQL/postgres-data:/var/lib/postgresql/data
+
+  #pgadmin-compose:
+   # image: dpage/pgadmin4
+   # environment:
+    #  PGADMIN_DEFAULT_EMAIL: "gismarxev@gmail.com"
+     # PGADMIN_DEFAULT_PASSWORD: "docker"
+    #ports:
+    #  - "80:80"
+    #depends_on:
+    #  - postgres-compose
+
+    #Nginx Service
+ # webserver:
+ #   image: nginx
+ #   restart: unless-stopped
+ #   tty: true
+ #   ports:
+ ##     - "80:80"
+ #   volumes:
+ #     - ./www:/usr/share/nginx/html:ro
+     # - ./nginx/conf.d/:/etc/nginx/conf.d/
+
+   # networks:
+   # - app-network
