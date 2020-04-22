@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import routes from './routes';
 
 import './database';
@@ -12,6 +13,8 @@ class App {
   }
 
   middlewares() {
+    /* O cors define o endereço que pode fazer requisições para a API */
+    this.server.use(cors(/* { origin: 'https://rocketseat.com.br' } */));
     this.server.use(express.json());
   }
 
