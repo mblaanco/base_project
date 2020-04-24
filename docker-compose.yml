@@ -1,18 +1,34 @@
 version: "3"
 services:
- # base_project:
-  #  image: muriloblancoflor/base_project:latest
-   # ports:
- #     - 3333:3333
-#    #command: yarn sequelize db:migrate
-    #command: >
-     #   bash -c "./wait-for-it/wait-for-it.sh postgres-compose:5432 -- yarn sequelize db:migrate
-      #  && yarn dev"
+  base_project:
+    image: muriloblancoflor/base_project:latest
+    ports:
+      - 3333:3333
+    #command: yarn sequelize db:migrate
+    command: >
+        bash -c "./wait-for-it/wait-for-it.sh postgres-compose:5432 -- yarn sequelize db:migrate
+        && yarn dev"
     #command: ["yarn", "dev"]
-   # links:
-    #  - postgres-compose
-   # depends_on:
-    #  - postgres-compose
+    links:
+      - postgres-compose
+    depends_on:
+      - postgres-compose
+
+  front:
+    image: muriloblancoflor/mevizyafront:latest
+    ports:
+      - 3000:3000
+    #command: yarn sequelize db:migrate
+    #command: >
+    #    bash -c "./wait-for-it/wait-for-it.sh postgres-compose:5432 -- yarn sequelize db:migrate
+    #    && yarn dev"
+    #command: ["yarn", "dev"]
+    links:
+      - base_project
+    depends_on:
+      - base_project
+    stdin_open: true
+    tty: true
 
   postgres-compose:
     image: mdillon/postgis
@@ -36,14 +52,14 @@ services:
     #  - postgres-compose
 
     #Nginx Service
- # webserver:
- #   image: nginx
- #   restart: unless-stopped
- #   tty: true
- #   ports:
- ##     - "80:80"
- #   volumes:
- #     - ./www:/usr/share/nginx/html:ro
+  webserver:
+    image: nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/usr/share/nginx/html:ro
      # - ./nginx/conf.d/:/etc/nginx/conf.d/
 
    # networks:
