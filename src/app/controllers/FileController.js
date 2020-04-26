@@ -18,6 +18,7 @@ class FileController {
 
     if (req.body.file_id !== undefined && req.body.file_id !== null) {
       const lista = await File.findByPk(req.body.file_id);
+      console.log(lista);
       if (lista !== null) {
         return res.json(lista);
       }

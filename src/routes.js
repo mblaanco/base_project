@@ -25,6 +25,7 @@ routes.get('/uxcounter', TableController.index);
 routes.delete('/deletall', TableController.delete);
 
 routes.get('/files', FileController.index);
+routes.post('/file', FileController.index);
 routes.post('/files', upload.single('file'), FileController.store);
 routes.put('/updatelist', FileController.update);
 
