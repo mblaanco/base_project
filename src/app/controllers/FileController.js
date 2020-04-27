@@ -88,8 +88,8 @@ class FileController {
 
     const schema = Yup.object().shape({
       list_id: Yup.number().required(),
-      dt_ini: Yup.date().required(),
-      dt_fim: Yup.date().required(),
+      // dt_ini: Yup.date().required(),
+      // dt_fim: Yup.date().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
