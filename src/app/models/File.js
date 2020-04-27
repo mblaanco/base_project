@@ -9,6 +9,11 @@ class File extends Model {
         content: Sequelize.TEXT,
         dt_ini: Sequelize.DATE,
         dt_fim: Sequelize.DATE,
+        midia: Sequelize.STRING,
+        bgcolor: Sequelize.STRING,
+        tipo_letra: Sequelize.STRING,
+        tamanho_letra: Sequelize.STRING,
+        cor_letra: Sequelize.STRING,
       },
       {
         sequelize,

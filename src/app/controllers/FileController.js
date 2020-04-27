@@ -91,7 +91,6 @@ class FileController {
       dt_ini: Yup.date().required(),
       dt_fim: Yup.date().required(),
     });
-    const { midia } = req.body;
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails.' });
@@ -103,13 +102,27 @@ class FileController {
     if (!lista) {
       return res.status(401).json({ error: 'Lista não encontrada.' });
     }
-    const { id, dt_ini, dt_fim } = await lista.update(req.body);
+    console.log(req.body);
+    const {
+      id,
+      dt_ini,
+      dt_fim,
+      midia,
+      bgcolor,
+      tipo_letra,
+      tamanho_letra,
+      cor_letra,
+    } = await lista.update(req.body);
 
     return res.json({
       id,
       dt_ini,
       dt_fim,
       midia,
+      bgcolor,
+      tipo_letra,
+      tamanho_letra,
+      cor_letra,
     });
   }
 }
